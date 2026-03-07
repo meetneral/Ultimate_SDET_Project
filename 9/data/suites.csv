@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","871","Hybrid Flow: Invalid Login","chromium","Sat Mar 07 19:37:31 UTC 2026","passed","Sat Mar 07 19:37:32 UTC 2026","","spec/Hybrid-test.spec.ts","",""
+"","1233","Hybrid Flow: Valid Login","chromium","Sat Mar 07 19:37:30 UTC 2026","passed","Sat Mar 07 19:37:31 UTC 2026","","spec/Hybrid-test.spec.ts","",""
