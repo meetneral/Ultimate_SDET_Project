@@ -23,6 +23,8 @@ jobs:
       run: npx playwright install --with-deps
       
     - name: Run Hybrid & AI Tests
+      env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # This is the bridge
       run: npx playwright test --grep "Hybrid-test.spec"
       
     - name: Upload Test Report

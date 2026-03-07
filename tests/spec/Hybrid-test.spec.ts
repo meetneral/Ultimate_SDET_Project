@@ -17,7 +17,7 @@ for (const data of testData) {
 
         // We use the "Smart" click here. 
         // If the ID changes to "WRONG_ID", the AI will heal it.
-        await smartPage.click('#username', 'The login username input field');
+        await smartPage.click('#WRONG_ID_FOR_GITHUB', 'The login username input field');
         await page.fill('#username', data.username);
         
         await smartPage.click('#password', 'The login password input field');
