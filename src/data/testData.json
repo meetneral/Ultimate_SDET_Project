@@ -1,0 +1,12 @@
+[
+  {
+    "username": "tomsmith",
+    "password": "SuperSecretPassword!",
+    "desc": "Valid Login"
+  },
+  {
+    "username": "invalidUser",
+    "password": "wrongPassword",
+    "desc": "Invalid Login"
+  }
+]
