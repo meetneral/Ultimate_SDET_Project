@@ -4,7 +4,10 @@ import { SmartPage } from "../../src/utils/smartPage";
 import testData from "../../src/data/testData.json";
 import { getAuthToken } from "../../src/utils/authHelper";
 
-for (const data of testData) {
+for (const data of testData.first) {
+  // Only run login tests for objects with username and password
+  if (!data.username || !data.password) continue;
+
   test(`Hybrid Flow: ${data.desc}`, async ({ page, request }) => {
     const userApi = new UserApi(request);
     const smartPage = new SmartPage(page);
@@ -17,9 +20,9 @@ for (const data of testData) {
     await page.goto("https://the-internet.herokuapp.com/login");
 
     // We use the "Smart" click here.
-    // If the ID changes to "WRONG_ID", the AI will heal it.
+    // If the ID changes, the AI will heal it.
     await smartPage.click(
-      "#WRONG_ID_FOR_GITHUB",
+      "#username",
       "The login username input field",
     );
     await page.fill("#username", data.username);

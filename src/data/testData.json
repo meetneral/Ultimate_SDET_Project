@@ -1,12 +1,31 @@
-[
-  {
-    "username": "tomsmith",
-    "password": "SuperSecretPassword!",
-    "desc": "Valid Login"
-  },
-  {
-    "username": "invalidUser",
-    "password": "wrongPassword",
-    "desc": "Invalid Login"
-  }
-]
+{
+    "first": [
+        {
+            "username": "tomsmith",
+            "password": "SuperSecretPassword!",
+            "desc": "Valid Login"
+        },
+        {
+            "username": "invalidUser",
+            "password": "wrongPassword",
+            "desc": "Invalid Login"
+        },
+        {
+            "id": 1,
+            "searchTerm": "Playwright",
+            "expectedTitle": "Playwright"
+        }
+    ],
+    "second": [
+        {
+            "id": 2,
+            "searchTerm": "SDET",
+            "expectedTitle": "SDET"
+        },
+        {
+            "id": 3,
+            "searchTerm": "Automation",
+            "expectedTitle": "Automation"
+        }
+    ]
+}

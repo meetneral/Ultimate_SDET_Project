@@ -3,7 +3,7 @@ import { APIRequestContext, expect } from '@playwright/test';
 export class UserApi {
     constructor(private request: APIRequestContext) {}
 
-    async createUser(name: string, job: string) {
+    async createUser(name: string|undefined, job: string|undefined) {
         // Switching to JSONPlaceholder - reliable and no Cloudflare block
         const response = await this.request.post('https://jsonplaceholder.typicode.com/posts', {
             data: {
