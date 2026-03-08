@@ -1,0 +1,2 @@
+🔑 Extracted Token: SECRET_WARRIOR_TOKEN_101
+✅ Token successfully injected into Browser!
