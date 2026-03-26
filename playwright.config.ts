@@ -13,7 +13,7 @@ import 'dotenv/config'; // This loads variables from .env into process.env
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-
+  
   timeout: 90000, // Increase to 90 seconds
   expect: {
     timeout: 10000,
@@ -30,15 +30,31 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter:[['html'],
-    ['allure-playwright', { outputFolder: 'allure-results' }]
+  
+    ['allure-playwright', { outputFolder: 'allure-results' ,environmentInfo: {
+        OS: process.platform,
+        Browser: 'Chromium',
+      }}]
   ] ,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    video: 'on',
+    screenshot: 'on',
+    headless: false,
+    // trace: 'on',
+  contextOptions: {
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+  },
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-
+      ignoreHTTPSErrors: true,
+    viewport: { width: 1280, height: 720 },
+    // Sometimes helpful to slow down slightly to mimic human behavior
+    launchOptions: {
+      slowMo: 100, 
+      args: ['--disable-http2'] // Force disable HTTP/2 at the browser level
+    },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */

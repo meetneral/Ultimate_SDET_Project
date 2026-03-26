@@ -41,7 +41,7 @@ for (const data of testData.first) {
   });
   
 }
-test.only("Advanced API Chaining: Injecting Token to UI", async ({ page }) => {
+test("Advanced API Chaining: Injecting Token to UI", async ({ page }) => {
     // 1. Get Token from API
     const token = await getAuthToken();
     console.log(`🔑 Extracted Token: ${token}`);

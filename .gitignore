@@ -7,7 +7,7 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 .env
-healed-locators.json <-- Add this
-allure-results/ <-- Add this
-allure-report/ <-- Add this
-allure-history/ <-- Add this
+healed-locators.json 
+allure-results/ 
+allure-report/
+allure-history/
