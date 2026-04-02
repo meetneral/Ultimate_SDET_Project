@@ -17,7 +17,7 @@ test('UI + API + MongoDB backend integrity', async ({ page }) => {
 //   await expect(page.locator('#confirmation')).toContainText('Transfer Successful');
 
   // --- Step 2: MongoDB Backend Integrity ---
-  const uri = 'mongodb+srv://meetneral33:C6OmSekfGzEu7lnq@cluster0.jxe3e.mongodb.net/';
+  const uri = 'mongodb+srv://meetneral33:sjnv@cluster0.jxe3e.mongodb.net/';
   const client = new MongoClient(uri);
 
   try {
