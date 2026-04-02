@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4","Hybrid Flow: Invalid Login","chromium","Thu Apr 02 16:41:51 UTC 2026","failed","Thu Apr 02 16:41:51 UTC 2026","","spec/Hybrid-test.spec.ts","",""
+"","3","Hybrid Flow: Valid Login","chromium","Thu Apr 02 16:41:48 UTC 2026","failed","Thu Apr 02 16:41:48 UTC 2026","","spec/Hybrid-test.spec.ts","",""
+"","4","Advanced API Chaining: Injecting Token to UI","chromium","Thu Apr 02 16:41:55 UTC 2026","failed","Thu Apr 02 16:41:55 UTC 2026","","spec/Hybrid-test.spec.ts","",""
