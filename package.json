@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-    "test:ai": "npx playwright test --grep 'Hybrid-test.spec' --project=chromium",
+    "test:ai": "npx playwright test --grep 'iframe-validation.spec' --project=chromium",
     "report:generate": "npx allure generate ./allure-results --clean -o ./allure-report",
     "report:open": "npx allure open ./allure-report",
     "allure": "npx allure serve ./allure-results",
@@ -16,7 +16,7 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "@types/node": "^25.3.3",
+    "@types/node": "^25.5.0",
     "allure-playwright": "^3.6.0"
   },
   "dependencies": {
