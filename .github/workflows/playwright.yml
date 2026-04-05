@@ -7,35 +7,27 @@ on:
     branches: [ main, master ]
 
 jobs:
-  test:
+  shard1:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
       - name: Install dependencies
         run: npm ci
-
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-
-      - name: Run Hybrid & AI Tests
+      - name: Run Playwright Shard 1
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           CI: true
-        run: npx playwright test --grep "Hybrid-test.spec"
+        run: npx playwright test tests/spec/Hybrid-test.spec.ts --shard=1 --shard-total=2
 
-      # -----------------------------
       # Jira Integration on Failure
-      # -----------------------------
-
       - name: Login to Jira
         if: failure()
         uses: atlassian/gajira-login@v3
@@ -50,24 +42,15 @@ jobs:
         with:
           project: PROJ
           issuetype: Bug
-          summary: "❌ Automation Failure in ${{ github.workflow }}"
+          summary: "❌ Automation Failure in Shard 1 - ${{ github.workflow }}"
           description: |
-            The Playwright test suite has failed in the CI pipeline.
+            Playwright Shard 1 failed.
 
             *Workflow:* ${{ github.workflow }}
             *Run ID:* ${{ github.run_id }}
             *Triggered by:* ${{ github.actor }}
 
-            Allure Report:
-            https://meetneral.github.io/Ultimate_SDET_Project/
-
-            Artifacts:
-            Check the GitHub Actions run logs.
-
-      # -----------------------------
       # Allure Reporting
-      # -----------------------------
-
       - name: Get Allure history
         uses: actions/checkout@v4
         if: always()
@@ -93,15 +76,12 @@ jobs:
           publish_dir: allure-history
           force_modify_gitpass: true
 
-      # -----------------------------
       # Upload Artifacts
-      # -----------------------------
-
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report-shard1
           path: playwright-report/
           retention-days: 30
 
@@ -109,9 +89,97 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: allure-report
+          name: allure-report-shard1
           path: allure-history/
           retention-days: 30
+
+  shard2:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright Shard 2
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          CI: true
+        run: npx playwright test tests/spec/example.spec.ts --shard=2 --shard-total=2
+
+      # Jira Integration on Failure
+      - name: Login to Jira
+        if: failure()
+        uses: atlassian/gajira-login@v3
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+      - name: Create Jira Issue on Failure
+        if: failure()
+        uses: atlassian/gajira-create@v3
+        with:
+          project: PROJ
+          issuetype: Bug
+          summary: "❌ Automation Failure in Shard 2 - ${{ github.workflow }}"
+          description: |
+            Playwright Shard 2 failed.
+
+            *Workflow:* ${{ github.workflow }}
+            *Run ID:* ${{ github.run_id }}
+            *Triggered by:* ${{ github.actor }}
+
+      # Allure Reporting
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+          force_modify_gitpass: true
+
+      # Upload Artifacts
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-shard2
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report-shard2
+          path: allure-history/
+          retention-days: 30
+
+
 
 
 
@@ -131,22 +199,64 @@ jobs:
 #   test:
 #     timeout-minutes: 60
 #     runs-on: ubuntu-latest
+
 #     steps:
 #       - name: Checkout
 #         uses: actions/checkout@v4
+
 #       - name: Set up Node
 #         uses: actions/setup-node@v4
 #         with:
 #           node-version: 20
+
 #       - name: Install dependencies
 #         run: npm ci
+
 #       - name: Install Playwright Browsers
 #         run: npx playwright install --with-deps
+
 #       - name: Run Hybrid & AI Tests
 #         env:
 #           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 #           CI: true
-#         run: npx playwright test --grep "Hybrid-test.spec" || true
+#         run: npx playwright test --grep "Hybrid-test.spec"
+
+#       # -----------------------------
+#       # Jira Integration on Failure
+#       # -----------------------------
+
+#       - name: Login to Jira
+#         if: failure()
+#         uses: atlassian/gajira-login@v3
+#         env:
+#           JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+#           JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+#           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+#       - name: Create Jira Issue on Failure
+#         if: failure()
+#         uses: atlassian/gajira-create@v3
+#         with:
+#           project: PROJ
+#           issuetype: Bug
+#           summary: "❌ Automation Failure in ${{ github.workflow }}"
+#           description: |
+#             The Playwright test suite has failed in the CI pipeline.
+
+#             *Workflow:* ${{ github.workflow }}
+#             *Run ID:* ${{ github.run_id }}
+#             *Triggered by:* ${{ github.actor }}
+
+#             Allure Report:
+#             https://meetneral.github.io/Ultimate_SDET_Project/
+
+#             Artifacts:
+#             Check the GitHub Actions run logs.
+
+#       # -----------------------------
+#       # Allure Reporting
+#       # -----------------------------
+
 #       - name: Get Allure history
 #         uses: actions/checkout@v4
 #         if: always()
@@ -154,6 +264,7 @@ jobs:
 #         with:
 #           ref: gh-pages
 #           path: gh-pages
+
 #       - name: Generate Allure Report
 #         uses: simple-elf/allure-report-action@master
 #         if: always()
@@ -161,6 +272,7 @@ jobs:
 #           allure_results: allure-results
 #           allure_history: allure-history
 #           keep_reports: 20
+
 #       - name: Deploy report to Github Pages
 #         if: always()
 #         uses: peaceiris/actions-gh-pages@v3
@@ -169,13 +281,19 @@ jobs:
 #           publish_branch: gh-pages
 #           publish_dir: allure-history
 #           force_modify_gitpass: true
-#       - name: Upload Artifacts
+
+#       # -----------------------------
+#       # Upload Artifacts
+#       # -----------------------------
+
+#       - name: Upload Playwright Report
 #         uses: actions/upload-artifact@v4
 #         if: always()
 #         with:
 #           name: playwright-report
 #           path: playwright-report/
 #           retention-days: 30
+
 #       - name: Upload Allure Report
 #         uses: actions/upload-artifact@v4
 #         if: always()
