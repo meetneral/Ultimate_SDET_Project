@@ -1,0 +1,1 @@
+[{"uid":"312d83a042e05f1b","name":"Hybrid Flow: Invalid Login","time":{"start":1775409238786,"stop":1775409240423,"duration":1637},"status":"passed","severity":"normal"},{"uid":"4d22b7327617c798","name":"Advanced API Chaining: Injecting Token to UI","time":{"start":1775409240640,"stop":1775409241155,"duration":515},"status":"passed","severity":"normal"}]
