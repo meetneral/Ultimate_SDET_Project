@@ -1,0 +1,1 @@
+[{"uid":"7bf515c4fce8b6b3","name":"Interact with button inside Shadow DOM","time":{"start":1775580446854,"stop":1775580449375,"duration":2521},"status":"passed","severity":"normal"},{"uid":"ba542162fa5b3700","name":"shadow DOM interaction demo","time":{"start":1775580446313,"stop":1775580446315,"duration":2},"status":"skipped","severity":"normal"}]
