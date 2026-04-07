@@ -5,7 +5,7 @@ import { IframeUtil } from '../../src/utils/iframe.utils';
 
 
 
-test('iframe util fhdgcnworks', async ({ page }) => {
+test('iframe util works', async ({ page }) => {
   await page.goto('http://127.0.0.1:5500/demo.html');
   await page.waitForLoadState('networkidle');
   await page.waitForSelector('h1');

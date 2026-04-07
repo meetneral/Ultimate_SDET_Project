@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shadow DOM Demo</title>
+</head>
+<body>
+  <h1>Shadow DOM Example</h1>
+
+  <!-- Custom element -->
+  <my-component></my-component>
+
+  <script>
+    class MyComponent extends HTMLElement {
+      constructor() {
+        super();
+        // Attach shadow root
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        // Add some content inside shadow DOM
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('class', 'content');
+
+        const title = document.createElement('h2');
+        title.textContent = 'Hello from Shadow DOM';
+
+        const button = document.createElement('button');
+        button.textContent = 'Click Me';
+        button.addEventListener('click', () => {
+          button.textContent = 'Clicked!';
+        });
+
+        wrapper.appendChild(title);
+        wrapper.appendChild(button);
+        shadow.appendChild(wrapper);
+      }
+    }
+
+    // Define the custom element
+    customElements.define('my-component', MyComponent);
+  </script>
+</body>
+</html>
