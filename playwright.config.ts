@@ -54,7 +54,7 @@ export default defineConfig({
     launchOptions: {
       slowMo: 100, 
       args: ['--disable-http2',
-         '--start-maximized',
+       //  '--start-maximized',
       ] ,// Force disable HTTP/2 at the browser level
     },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
