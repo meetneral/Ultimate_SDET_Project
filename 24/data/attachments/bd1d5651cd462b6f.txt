@@ -1,0 +1,1 @@
+Successfully clicked the button inside the Shadow DOM
