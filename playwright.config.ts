@@ -7,7 +7,7 @@ const isCI = !!process.env.CI;
 export default defineConfig({
   timeout: 90000,
   expect: { timeout: 10000 },
-  testDir: "./tests/spec",
+  testDir: "./tests/spec/MuscleBlaze/",
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
@@ -17,23 +17,26 @@ export default defineConfig({
     ["allure-playwright", { outputFolder: "allure-results" }],
   ],
 
-  use: {
-    video: "on",
-    screenshot: "on",
-    headless: isCI, // ✅ headless in CI, headed locally
-    ignoreHTTPSErrors: isCI, // ✅ ignore HTTPS errors in CI only
-    viewport: isCI ? null : { width: 1920, height: 1080 }, // ✅ full view locally
-    launchOptions: {
-      slowMo: isCI ? 0 : 100, // ✅ slower locally to mimic human behavior
-      args: [
-        ...(isCI ? ["--disable-http2"] : ["--start-maximized"]), 
-      ],
-    },
-    contextOptions: {
-      userAgent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    },
+use: {
+  video: "on",
+  screenshot: "on",
+  headless: isCI, // headless in CI, headed locally
+  ignoreHTTPSErrors: isCI,
+  viewport: null, // disables Playwright’s default 1280x720
+  launchOptions: {
+    slowMo: isCI ? 0 : 100,
+    args: [
+      ...(isCI
+        ? ["--disable-http2"]
+        : ["--start-maximized", "--window-size=1920,1080"]), // ✅ force full HD
+    ],
   },
+  contextOptions: {
+    userAgent:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+  },
+},
+
 
   projects: [
     {

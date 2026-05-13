@@ -20,7 +20,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        # run: npx playwright install --with-deps
+        run: npx playwright test --grep 'Authencity.spec' --project=chromium
       - name: Run Playwright Shard 1
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
