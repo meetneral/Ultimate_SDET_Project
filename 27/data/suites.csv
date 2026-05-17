@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5513","Redirection of Page","chromium","Sun May 17 07:07:07 UTC 2026","passed","Sun May 17 07:07:13 UTC 2026","Homepage","Authencity.spec.ts","",""
+"","5340","should navigate to the homepage and click the label","chromium","Sun May 17 07:07:36 UTC 2026","passed","Sun May 17 07:07:41 UTC 2026","Homepage","HomePage.spec.ts","",""
+"","6705","Protien check","chromium","Sun May 17 07:07:29 UTC 2026","passed","Sun May 17 07:07:36 UTC 2026","Homepage","Authencity.spec.ts","",""
+"","6149","Authenticity Page Functionality","chromium","Sun May 17 07:07:14 UTC 2026","passed","Sun May 17 07:07:20 UTC 2026","Homepage","Authencity.spec.ts","",""
