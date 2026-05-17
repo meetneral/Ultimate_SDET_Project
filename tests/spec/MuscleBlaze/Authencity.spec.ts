@@ -1,27 +1,45 @@
-import { test, expect } from "@playwright/test";
-import { Homepage } from "../../MBpage/Homepage";
+import { test, expect, Page } from "@playwright/test";
 import { Authenticity } from "../../MBpage/Authenticity";
 
 test.describe("Homepage", () => {
-  let Page: Authenticity;
+  let authenticity: Authenticity;
 
   test.beforeEach(async ({ page }) => {
-    Page = new Authenticity(page);
+    authenticity = new Authenticity(page);
+    await page.goto("https://www.muscleblaze.com/");
   });
 
-  test("should navigate to the homepage and click the label", async ({
-    page,
-  }) => {
-    await Page.navigate();
-    await Page.Aunthenticity(Page.authenticity);
-    await Page.clickCheckAunthenticity(Page.checkAuthenticity);
-    expect(Page.checkAuthenticity).toBeVisible();
+  test.afterEach(async ({ page }) => {
+    await page.close();
+  });
 
-    // Assertion
-    await expect(page).toHaveURL(
-      "https://www.muscleblaze.com/authenticity-guaranteed",
-    );
-    await Page.fillDetails();
-    await Page.clickCheckNow(Page.checkNowBtn);
+  test("Redirection of Page", async ({ page }) => {
+    // await authenticity.navigate();
+    await authenticity.Aunthenticity(authenticity.authenticity);
+    await authenticity.clickCheckAunthenticity(authenticity.checkAuthenticity);
+
+    // await expect(authenticity.checkAuthenticity).toBeVisible();
+    await expect(page).toHaveURL("https://www.muscleblaze.com/authenticity-guaranteed");
+
+    // await authenticity.fillDetails();
+    // await authenticity.clickCheckNow(authenticity.checkNowBtn);
+  });
+
+  test("Authenticity Page Functionality", async ({ page }) => {
+    // await authenticity.navigate();
+    await authenticity.Aunthenticity(authenticity.authenticity);
+    await authenticity.clickCheckAunthenticity(authenticity.checkAuthenticity);
+    
+    // await expect(authenticity.checkAuthenticity).toBeVisible();
+    await expect(page).toHaveURL("https://www.muscleblaze.com/authenticity-guaranteed");
+    
+    await authenticity.fillDetails();
+    await authenticity.clickCheckNow(authenticity.checkNowBtn);
+  });
+  test("Protien check", async ({ page }) => {
+    await authenticity.Aunthenticity(authenticity.authenticity);
+    await authenticity.clickProtienLabCertificate(authenticity.protienLabCertificate);
+    await expect(page).toHaveURL("https://www.muscleblaze.com/lab-results");
+    await authenticity.searchByBatch(authenticity.protienLabCertificate);
   });
 });

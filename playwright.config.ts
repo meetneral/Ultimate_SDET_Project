@@ -8,7 +8,7 @@ export default defineConfig({
   timeout: 90000,
   expect: { timeout: 10000 },
   testDir: "./tests/spec/MuscleBlaze/",
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
   workers: isCI ? 1 : undefined,
