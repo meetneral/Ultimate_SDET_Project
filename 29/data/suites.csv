@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5459","should navigate to the homepage and click the label","chromium","Tue May 19 16:22:50 UTC 2026","failed","Tue May 19 16:22:56 UTC 2026","Homepage","HomePage.spec.ts","",""
+"","11441","Redirection of Footer","chromium","Tue May 19 16:22:28 UTC 2026","passed","Tue May 19 16:22:40 UTC 2026","Muscle Blaze Footer","Footer.spec.ts","",""
+"","90386","Authenticity Page Functionality","chromium","Tue May 19 16:20:49 UTC 2026","broken","Tue May 19 16:22:19 UTC 2026","Authenticity","Authencity.spec.ts","",""
+"","8514","Protien check","chromium","Tue May 19 16:22:20 UTC 2026","passed","Tue May 19 16:22:28 UTC 2026","Authenticity","Authencity.spec.ts","",""
+"","90319","Redirection of Page","chromium","Tue May 19 16:16:16 UTC 2026","broken","Tue May 19 16:17:46 UTC 2026","Authenticity","Authencity.spec.ts","",""
