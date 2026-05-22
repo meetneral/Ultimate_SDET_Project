@@ -10,7 +10,7 @@ export class Homepage {
   public businessSupport: Locator;
 
   constructor(public page: Page) {
-    this.allProducts = page.locator('text=" All Products"');
+    this.allProducts = page.locator('(//*[text()=" All Products"])[1]');
     this.offers = page.locator('text="Offers"');
     this.stores = page.locator('text=" Stores"');
     this.ourStory = page.locator('text=" Our Story"');

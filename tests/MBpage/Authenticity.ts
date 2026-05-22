@@ -13,7 +13,7 @@ export class Authenticity {
   public protienLabCertificate: Locator;
   public CertifiedLabReport: Locator;
   constructor(public page: Page) {
-    this.checkAuthenticity = page.locator('//*[@id="const_web_main_container"]/div[2]/div[1]/div/div[11]/div[2]/div/a[1]/div[2]');
+    this.checkAuthenticity = page.locator('(//*[text()="Check Authenticity"])[1]');
     // this.checkAuthenticity = page.locator('text="Check Authenticity"');
     this.authenticity = page.locator('text=" Authenticity"');
     this.chatSupport = page.locator('text="Chat Support"');
