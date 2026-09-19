@@ -4,8 +4,8 @@ export async function getAuthToken() {
 const context = await request.newContext();
 const response = await context.post('https://jsonplaceholder.typicode.com/posts', {
 data: {
-username: 'admin',
-password: 'password123'
+username: process.env.USERNAME,
+password: process.env.PASSWORD 
 }
 });
 
